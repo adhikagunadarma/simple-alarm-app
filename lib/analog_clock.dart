@@ -32,8 +32,8 @@ class _AnalogClockState extends State<AnalogClock> {
   void initState() {
     super.initState();
     _updateTime();
-    var _alarmHour = 16;
-    var _alarmMinute = 29;
+    var _alarmHour = 17;
+    var _alarmMinute = 46;
     _alarmOff = false;
     _alarmTime = new DateTime(
         _now.year, _now.month, _now.day, _alarmHour, _alarmMinute, 0, 0, 0);
@@ -50,11 +50,29 @@ class _AnalogClockState extends State<AnalogClock> {
   void _updateTime() {
 
     setState(() {
+      // _now = DateTime.now(); ///not working anymore because the clock is customed
+      setClockTick();
       _timer = Timer(
         Duration(seconds: 1),
         _updateTime,
       );
     });
+  }
+
+  void setClockTick(){
+    if (_now.second == 60){
+      _now = new DateTime(
+          _now.year, _now.month, _now.day, _now.hour, _now.minute + 1, 0, _now.millisecond, _now.microsecond);
+    }else if (_now.minute == 60){
+      _now = new DateTime(
+          _now.year, _now.month, _now.day, _now.hour + 1, 0, _now.second, _now.millisecond, _now.microsecond);
+    }else if (_now.hour == 24){
+      _now = new DateTime(
+          _now.year, _now.month, _now.day, 00, _now.minute , _now.second, _now.millisecond, _now.microsecond);
+    }else {
+      _now = new DateTime(
+          _now.year, _now.month, _now.day, _now.hour, _now.minute , _now.second + 1, _now.millisecond, _now.microsecond);
+    }
   }
 
   @override
@@ -109,16 +127,15 @@ class _AnalogClockState extends State<AnalogClock> {
       );
     }
 
+    print(_now);
+
+    print(alarm);
     if(time == alarm && !_alarmOff){
-      print('RINGG!');
+      // print('RINGG!');
 
-      // _showAlertDialog(context);
+      _showAlertDialog(context);
     }
-    return MaterialApp(
-
-      title: "Simple Alarm Clock",
-
-      home: new Scaffold(
+    return new Scaffold(
         //Here you can set what ever background color you need.
         backgroundColor: customTheme.backgroundColor,
         body: Center(
@@ -144,6 +161,9 @@ class _AnalogClockState extends State<AnalogClock> {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: GestureDetector(
+                    onTap: () {
+                      _showAlertDialog(context);
+                    },
                     onPanUpdate: (details){
                       if (details.delta.dx > 0){
                         var changes = _now.minute + (details.delta.dx / 2.5);
@@ -159,7 +179,7 @@ class _AnalogClockState extends State<AnalogClock> {
                               _now.year, _now.month, _now.day, _now.hour, changes.toInt(), _now.second, _now.millisecond, _now.microsecond);
                         });
                       }
-
+                      // //to smoothen the UI UX, set hour is disabled
                       // if (details.delta.dy > 0){
                       //   var changes = _now.hour + (details.delta.dy / 2.5);
                       //   setState(() {
@@ -260,7 +280,7 @@ class _AnalogClockState extends State<AnalogClock> {
             ],
           ),
         ),
-      ),
+
     );
   }
 }
