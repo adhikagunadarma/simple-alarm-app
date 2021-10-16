@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 
 import 'hand.dart';
+import 'number.dart';
 
 /// Total distance traveled by a second or a minute hand, each second or minute,
 /// respectively.
@@ -187,16 +188,17 @@ class _AnalogClockState extends State<AnalogClock> {
                           alignment: Alignment.center,
                           children: [
                             // min
+                            Number(),
                             Hand(
                               color: Colors.transparent,
                               size: 0.5,
                               angleRadians: _now.minute * radiansPerTick +
                                   (_now.second / 60) * radiansPerTick,
                               child: Transform.translate(
-                                offset: Offset(0.0, -90.0),
+                                offset: Offset(0.0, -70.0),
                                 child: Container(
                                   width: 10,
-                                  height: 250,
+                                  height: 150,
                                   decoration: BoxDecoration(
                                     color: customTheme.highlightColor,
                                   ),
@@ -211,10 +213,10 @@ class _AnalogClockState extends State<AnalogClock> {
                               angleRadians: _now.hour * radiansPerHour +
                                   (_now.minute / 60) * radiansPerHour,
                               child: Transform.translate(
-                                offset: Offset(0.0, -70.0),
+                                offset: Offset(0.0, -50.0),
                                 child: Container(
                                   width: 16,
-                                  height: 150,
+                                  height: 100,
                                   decoration: BoxDecoration(
                                     color: customTheme.primaryColor,
                                   ),
