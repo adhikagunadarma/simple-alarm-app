@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:intl/intl.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 
@@ -26,15 +25,17 @@ class _AnalogClockState extends State<AnalogClock> {
   var _now = DateTime.now();
   var _alarmOff;
   var _alarmTime;
+  var _alarmShown;
   late Timer _timer;
 
   @override
   void initState() {
     super.initState();
     _updateTime();
-    var _alarmHour = 17;
-    var _alarmMinute = 46;
+    var _alarmHour = 18;
+    var _alarmMinute = 32;
     _alarmOff = false;
+    _alarmShown = false;
     _alarmTime = new DateTime(
         _now.year, _now.month, _now.day, _alarmHour, _alarmMinute, 0, 0, 0);
 
@@ -127,13 +128,15 @@ class _AnalogClockState extends State<AnalogClock> {
       );
     }
 
-    print(_now);
-
-    print(alarm);
-    if(time == alarm && !_alarmOff){
-      // print('RINGG!');
-
-      _showAlertDialog(context);
+    // print(_now);
+    // print(alarm);
+    if(time == alarm && !_alarmOff && !_alarmShown){
+      setState(() {
+        _alarmShown = true;
+      });
+      Future.delayed(Duration.zero, () {
+        _showAlertDialog(context);
+      });
     }
     return new Scaffold(
         //Here you can set what ever background color you need.
@@ -161,9 +164,9 @@ class _AnalogClockState extends State<AnalogClock> {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: GestureDetector(
-                    onTap: () {
-                      _showAlertDialog(context);
-                    },
+                    // onTap: () {
+                    //   _showAlertDialog(context);
+                    // },
                     onPanUpdate: (details){
                       if (details.delta.dx > 0){
                         var changes = _now.minute + (details.delta.dx / 2.5);
