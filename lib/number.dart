@@ -11,7 +11,7 @@ class Number extends StatelessWidget{
     return Stack(
       children: [
         Transform.translate(
-          offset: Offset(0.0, -90.0),
+          offset: Offset(0.0, -MediaQuery.of(context).size.width* 0.2),
           child: Text(
             '12',
             style: TextStyle(
@@ -22,7 +22,7 @@ class Number extends StatelessWidget{
         ),
 
         Transform.translate(
-          offset: Offset(90.0, 0.0),
+          offset: Offset(MediaQuery.of(context).size.width* 0.2, 0.0),
           child: Text(
             '3',
             style: TextStyle(
@@ -32,7 +32,7 @@ class Number extends StatelessWidget{
           ),
         ),
         Transform.translate(
-          offset: Offset(0.0, 90.0),
+          offset: Offset(0.0, MediaQuery.of(context).size.width* 0.2),
           child: Text(
             '6',
             style: TextStyle(
@@ -42,7 +42,7 @@ class Number extends StatelessWidget{
           ),
         ),
         Transform.translate(
-          offset: Offset(-90.0, 0.0),
+          offset: Offset(-MediaQuery.of(context).size.width* 0.2, 0.0),
           child: Text(
             '9',
             style: TextStyle(
