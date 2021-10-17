@@ -1,16 +1,21 @@
 # simple_alarm_analog_clock
 
-A Simple app that shows analog clock and will ring when the time conditions is met
+A Simple app that shows analog clock and will pop diialog when the time conditions is met
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- Android SDK installed
+- Flutter & Dart SDK installed, and already added in environment variables to enable execute Flutter script from CLI
+- Android Emulator Device / Physical Device to run the App
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- `flutter doctor` to make sure all of the requirements is checked (see above)
+- `flutter pub get` to fetch installed packages for this project
+- `flutter run` to run the app
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Possible Bugs
+
+_Null Safety for Installed Packages_
+-- `dart pub outdated --mode=null-safety` then `dart pub upgrade --null-safety` to upgrade all existing packages to null-safety version
+
