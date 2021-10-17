@@ -19,3 +19,6 @@ A Simple app that shows analog clock and will pop diialog when the time conditio
 _Null Safety for Installed Packages_
 -- `dart pub outdated --mode=null-safety` then `dart pub upgrade --null-safety` to upgrade all existing packages to null-safety version
 
+## Notes
+
+- Simple Alarm Analog Clock only tested in Android platform.
